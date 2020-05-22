@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Aman's Security Console Home</h1>
+
+
+   <table>
+     <tr>
+       <th>Instance ID</th>
+         <th>Pub IP/Scheme</th>
+         <th>Security Group </th>
+         <th>Name</th>
+         <th>ACL</th>
+    </tr>
+    {% for items in ec2_data %}
+    <tr>
+      <td>{{ items.0 }}</td>
+      <td>{{ items.1 }}</td>
+      <td>{{ items.2 }}</td>
+      <td>{{ items.4 }}</td>
+      <td>{% for obj in items.3 %}
+        <li>{{ obj }}</li>
+      {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+
+    {% for items in elb_data %}
+    <tr>
+      <td>{{ items.0 }}</td>
+      <td>{{ items.1 }}</td>
+      <td>{{ items.2 }}</td>
+      <td>{{ items.3 }}</td>
+      <td>{{ items.4 }}</td>
+      <td>{{ items. }}</td>
+    </tr>
+    {% endfor %}
+
+    {% for items in rds_data %}
+    <tr>
+      <td>{{ items.0 }} </td>
+      <td>{{ items.1 }} </td>
+      <td>{{ items.2 }} </td>
+      <td>{{ items.3 }} </td>
+      <td>{{ items.4 }} </td>
+      <td>{{ items. }} </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}

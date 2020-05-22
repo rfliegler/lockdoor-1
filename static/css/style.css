@@ -1,0 +1,22 @@
+<style type="text/css" media="screen">
+
+table{
+border-collapse:collapse;
+border:1px solid #1d2124;
+}
+
+table th{
+border:1px solid #1d2124;
+}
+
+table td{
+border:1px solid #1d2124;
+}
+</style>
+
+.selected{
+  background-color:green;
+}
+.bad{
+  background-color:red;
+}

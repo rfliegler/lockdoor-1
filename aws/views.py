@@ -1,12 +1,8 @@
 from django.shortcuts import render
-from aws.forms import PostForm
 # Create your views here.
-from django.http import HttpResponse
-from .models import Asset
 import boto3
 from dateutil.tz import tzutc
 import datetime
-import re
 
 
 session = boto3.Session(profile_name='default')
@@ -60,7 +56,6 @@ def get_ec2_info():
             name = item['Instances'][0]['PrivateDnsName']
             data.append(name)
         ec2_assets.append(data)
-        print('these are the asssets',ec2_assets)
     return (ec2_assets)
 
 def get_elb_info():
@@ -111,7 +106,6 @@ def get_elb_info():
             name = "None"
             data.append(name)
         elb_assets.append(data)
-        print('these are the asssets',elb_assets)
     return (elb_assets)
 
 def get_rds_info():
@@ -162,21 +156,17 @@ def get_rds_info():
             name = "None"
             data.append(name)
         rds_assets.append(data)
-        print('these are the asssets',rds_assets)
     return (rds_assets)
 
 
 def index(request):
-    form = PostForm()
     current_user = request.user.id
     elb_data = get_elb_info()
     ec2_data = get_ec2_info()
     rds_data = get_rds_info()
-    print(ec2_data)
     context = {
         'ec2_data': ec2_data,
         'rds_data': rds_data,
         'elb_data': elb_data,
     }
-    print(context)
     return render(request, 'aws/index.html', context)

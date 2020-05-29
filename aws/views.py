@@ -3,14 +3,14 @@ from django.shortcuts import render
 import boto3
 from dateutil.tz import tzutc
 import datetime
+import os
 
 
-session = boto3.Session(profile_name='default')
+# session = boto3.Session(profile_name='default')
 
-# session = boto3.Session(region_name='us-west-2',
-#                             aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
-#                             aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
-#
+session = boto3.Session(region_name=os.environ['AWS_DEFAULT_REGION'],
+                            aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
+                            aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 
 def get_ec2_info():
     ec2 = session.client('ec2')
